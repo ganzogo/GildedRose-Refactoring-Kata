@@ -1,23 +1,15 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.4
 
 import PackageDescription
 
 let package = Package(
     name: "GildedRose",
     products: [
-        .library(
-            name: "GildedRose",
-            targets: ["GildedRose"]),
+        .library(name: "GildedRose", targets: ["GildedRose"]),
     ],
     targets: [
-        .target(
-            name: "GildedRose",
-            dependencies: []),
-        .target(
-            name: "GildedRoseApp",
-            dependencies: ["GildedRose"]),
-        .testTarget(
-            name: "GildedRoseTests",
-            dependencies: ["GildedRose"]),
+        .executableTarget(name: "GildedRoseApp", dependencies: ["GildedRose"]),
+        .target(name: "GildedRose", dependencies: []),
+        .testTarget(name: "GildedRoseTests", dependencies: ["GildedRose"]),
     ]
 )
