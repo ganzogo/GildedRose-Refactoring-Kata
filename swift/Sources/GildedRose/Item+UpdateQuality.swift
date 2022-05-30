@@ -1,48 +1,53 @@
 extension Item {
     
     func updateQuality() {
-        
-        performQualityUpdate()
-        quality = quality.clamping(min: 0, max: 50)
+    
+        sellIn = calculateNewSellInValue()
+        quality = calculateNewQualityValue()
+            .clamping(min: 0, max: 50)
     }
     
-    private func performQualityUpdate() {
+    private func calculateNewSellInValue() -> Int {
+        isSulfuras ? sellIn : sellIn - 1
+    }
+    
+    private func calculateNewQualityValue() -> Int {
         
-        if !isSulfuras {
-            sellIn = sellIn - 1
-        }
+        var newQuality = quality
         
         if !isAgedBrie && !isBackstagePasses {
             if !isSulfuras {
-                quality = quality - 1
+                newQuality = newQuality - 1
             }
         } else {
-            quality = quality + 1
+            newQuality = newQuality + 1
             
             if isBackstagePasses {
                 if sellIn < 10 {
-                    quality = quality + 1
+                    newQuality = newQuality + 1
                 }
                 
                 if sellIn < 5 {
-                    quality = quality + 1
+                    newQuality = newQuality + 1
                 }
             }
         }
         
-        if sellIn < 0 {
+        if isPastSellByDate {
             if !isAgedBrie {
                 if !isBackstagePasses {
                     if !isSulfuras {
-                        quality = quality - 1
+                        return newQuality - 1
                     }
                 } else {
-                    quality = quality - quality
+                    return 0
                 }
             } else {
-                quality = quality + 1
+                return newQuality + 1
             }
         }
+        
+        return newQuality
     }
     
 }
