@@ -23,6 +23,7 @@ extension Item {
         case agedBrie
         case backstagePasses
         case sulfuras
+        case conjured
     }
     
     var itemType: ItemType {
@@ -39,12 +40,17 @@ extension Item {
             return .sulfuras
         }
         
+        if isConjured {
+            return .conjured
+        }
+        
         return .normal
     }
     
     var isAgedBrie: Bool { isNamed("Aged Brie") }
     var isBackstagePasses: Bool { isNamed("Backstage passes to a TAFKAL80ETC concert") }
     var isSulfuras: Bool { isNamed("Sulfuras, Hand of Ragnaros") }
+    var isConjured: Bool { isNamed("Conjured Mana Cake") }
     
     private func isNamed(_ name: String) -> Bool {
         self.name == name
@@ -80,6 +86,9 @@ extension Item.ItemType {
             
         case .agedBrie:
             return AgedBrieItemUpdater()
+            
+        case .conjured:
+            return ConjuredItemUpdater()
         }
     }
 

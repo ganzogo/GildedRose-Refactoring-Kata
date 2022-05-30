@@ -107,10 +107,22 @@ class GildedRoseTests: XCTestCase {
     
     /// "Conjured" items degrade in Quality twice as fast as normal items
     func testConjuredItemsDegradeInQualityTwiceAsFastAsNormalItems() throws {
-        
-        // TODO
+
+        assertUpdateQuality(
+            name: "Conjured Mana Cake",
+            initial: .init(sellIn: 10, quality: 10),
+            expected: .init(sellIn: 9, quality: 8))
     }
-    
+
+    /// MVH: This isn't explicitly specified
+    func testConjuredItemsDegradeInQualityTwiceAsFastAsNormalItems_afterSellByDate() throws {
+
+        assertUpdateQuality(
+            name: "Conjured Mana Cake",
+            initial: .init(sellIn: 0, quality: 4),
+            expected: .init(sellIn: -1, quality: 0))
+    }
+
 }
 
 private extension GildedRoseTests {
