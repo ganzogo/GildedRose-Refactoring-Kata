@@ -2,6 +2,10 @@ extension Item {
     
     func updateQuality() {
         
+        if !isSulfuras {
+            sellIn = sellIn - 1
+        }
+        
         if !isAgedBrie && !isBackstagePasses {
             if quality > 0 {
                 if !isSulfuras {
@@ -13,23 +17,19 @@ extension Item {
                 quality = quality + 1
                 
                 if isBackstagePasses {
-                    if sellIn < 11 {
+                    if sellIn < 10 {
                         if quality < 50 {
                             quality = quality + 1
                         }
                     }
                     
-                    if sellIn < 6 {
+                    if sellIn < 5 {
                         if quality < 50 {
                             quality = quality + 1
                         }
                     }
                 }
             }
-        }
-        
-        if !isSulfuras {
-            sellIn = sellIn - 1
         }
         
         if sellIn < 0 {
