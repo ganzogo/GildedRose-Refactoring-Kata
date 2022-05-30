@@ -2,9 +2,9 @@ extension Item {
     
     func updateQuality() {
         
-        if name != "Aged Brie" && name != "Backstage passes to a TAFKAL80ETC concert" {
+        if !isAgedBrie && !isBackstagePasses {
             if quality > 0 {
-                if name != "Sulfuras, Hand of Ragnaros" {
+                if !isSulfuras {
                     quality = quality - 1
                 }
             }
@@ -12,7 +12,7 @@ extension Item {
             if quality < 50 {
                 quality = quality + 1
                 
-                if name == "Backstage passes to a TAFKAL80ETC concert" {
+                if isBackstagePasses {
                     if sellIn < 11 {
                         if quality < 50 {
                             quality = quality + 1
@@ -28,15 +28,15 @@ extension Item {
             }
         }
         
-        if name != "Sulfuras, Hand of Ragnaros" {
+        if !isSulfuras {
             sellIn = sellIn - 1
         }
         
         if sellIn < 0 {
-            if name != "Aged Brie" {
-                if name != "Backstage passes to a TAFKAL80ETC concert" {
+            if !isAgedBrie {
+                if !isBackstagePasses {
                     if quality > 0 {
-                        if name != "Sulfuras, Hand of Ragnaros" {
+                        if !isSulfuras {
                             quality = quality - 1
                         }
                     }
